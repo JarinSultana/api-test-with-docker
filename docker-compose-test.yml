@@ -1,0 +1,43 @@
+version: '3'
+services:
+  api-test:
+    build: .
+    image: api-test:latest
+    container_name: api-test
+    ports:
+      - "3001:3000"
+    environment:
+      - MONGODB_URI=mongodb://mongo-test:27017/usersdb
+    depends_on:
+      - mongo-test
+    networks:
+      - project-network-test
+
+  mongo-test:
+    image: mongo:latest
+    container_name: database-test
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data-test:/data/db
+    networks:
+      - project-network-test
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: test:latest
+    container_name: tests
+    environment:
+      - API_HOST=api-test
+      - MONGODB_URI=mongodb://mongo-test:27017/usersdb
+    networks:
+      - project-network-test
+
+networks:
+  project-network-test:
+    driver: bridge
+
+volumes:
+  mongo-data-test:

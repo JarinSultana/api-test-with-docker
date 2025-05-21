@@ -1,0 +1,15 @@
+FROM node:18
+
+WORKDIR /usr/src/test
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY run_tests_and_keep_alive.sh ./
+RUN chmod +x ./run_tests_and_keep_alive.sh
+
+COPY . .
+
+# CMD ["./run_tests_and_keep_alive.sh"]
+CMD ["bash", "run_tests_and_keep_alive.sh"]
