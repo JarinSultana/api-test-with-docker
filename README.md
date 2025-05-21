@@ -61,7 +61,7 @@ docker compose -f docker-compose-test.yml up --build -d
 
 🔹 mongo: MongoDB database
 
-All backend services are connected via the network-test.
+All backend services are connected via the project-network.
 
 
 ## Docker Services (Test)
