@@ -6,8 +6,8 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY run_tests_and_keep_alive.sh ./
-RUN chmod +x ./run_tests_and_keep_alive.sh
+COPY run_tests.sh ./
+RUN chmod +x ./run_tests.sh
 
 COPY . .
 
